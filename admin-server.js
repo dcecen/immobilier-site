@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PORT = 3001
 const ANNONCES_FILE = path.join(__dirname, 'public', 'annonces.json')
 const PHOTOS_DIR = path.join(__dirname, 'public', 'images', 'annonces')
-const DIST_DIR = path.join(__dirname, 'dist')
+const DIST_DIR = path.join(__dirname, 'docs')
 
 const app = express()
 app.use(express.json({ limit: '50mb' }))
