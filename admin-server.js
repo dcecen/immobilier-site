@@ -110,8 +110,8 @@ app.post('/api/publish', (req, res) => {
   const steps = [
     ['npm', ['run', 'build'], 'Construction du site (npm run build)…'],
     ['git', ['add', '.'], 'Indexation des fichiers (git add .)…'],
-    ['git', ['commit', '-m', 'mise à jour annonces'], 'Enregistrement (git commit)…'],
-    ['git', ['push'], 'Publication en ligne (git push)…'],
+    ['git', ['commit', '--allow-empty', '-m', 'maj-annonces'], 'Enregistrement (git commit)…'],
+    ['git', ['push', '--force'], 'Publication en ligne (git push)…'],
   ]
 
   ;(async () => {
