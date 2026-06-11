@@ -477,13 +477,19 @@ function ListingCard({ listing, onOpen }) {
   const isLocation = listing.transaction === 'location'
   const badgeCls = isLocation ? 'bg-ink-900 text-white' : 'bg-sand-500 text-white'
   const stats = getCardStats(listing)
+  const firstPhoto = listing.photoUrls && listing.photoUrls[0]
   return (
     <article onClick={() => onOpen(listing.ref)}
       className="group cursor-pointer bg-white border border-ink-200 rounded-xl overflow-hidden hover:shadow-card hover:-translate-y-0.5 transition-all">
-      <div className="relative aspect-[4/3] placeholder-stripes border-b border-ink-200 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-ink-500 text-center px-4">{listing.photoLabels[0]}</div>
-        </div>
+      <div className={`relative aspect-[4/3] border-b border-ink-200 overflow-hidden ${!firstPhoto ? 'placeholder-stripes' : 'bg-ink-100'}`}>
+        {firstPhoto ? (
+          <img src={firstPhoto} alt={listing.photoLabels[0] || listing.title}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-ink-500 text-center px-4">{listing.photoLabels[0]}</div>
+          </div>
+        )}
         <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
           <span className={`${badgeCls} text-[11px] font-medium uppercase tracking-wide px-2.5 py-1 rounded-full`}>{isLocation ? 'Location' : 'Vente'}</span>
           <span className="bg-white/95 backdrop-blur text-ink-800 border border-ink-200 text-[11px] font-medium uppercase tracking-wide px-2.5 py-1 rounded-full">{TYPE_LABELS[listing.type] || listing.type}</span>
